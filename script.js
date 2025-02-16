@@ -47,22 +47,27 @@ async function sendMessageToChatbot(message) {
     // Scroll to the latest message
     chatbotContent.scrollTop = chatbotContent.scrollHeight;
 
-    // Here, you would integrate with the Hugging Face API or your backend
-    const response = await fetch("https://api-inference.huggingface.co/models/your_model_name", {
-        method: "POST",
-        headers: {
-            "Authorization": "Bearer YOUR_HUGGINGFACE_API_KEY",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            inputs: message
-        })
-    });
+    // API call to Hugging Face Space
+    try {
+        const response = await fetch("https://hf.space/embed/your-username/your-space-name/api/predict/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                data: [message] // Adjust depending on how your Space handles the input
+            })
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    botMessage.textContent = "Bot: " + data.generated_text; // Replace with actual field from the API response
-    chatbotContent.scrollTop = chatbotContent.scrollHeight;
+        // Replace with actual field from the API response (modify as per your Space's response)
+        botMessage.textContent = "Bot: " + data.data[0];
+        chatbotContent.scrollTop = chatbotContent.scrollHeight;
+    } catch (error) {
+        console.error("Error:", error);
+        botMessage.textContent = "Bot: Error connecting. Please try again later.";
+    }
 }
 
 chatbotInput.addEventListener("keypress", function (e) {
