@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filament Cost Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Filament Cost Calculator</h1>
+    <p>Enter the details below to calculate the cost of your used filament.</p>
+    
+    <label for="total-cost">Total Cost of Filament Spool ($):</label>
+    <input type="number" id="total-cost" step="0.01" placeholder="e.g., 25.99">
+    
+    <label for="total-weight">Total Filament Weight (g):</label>
+    <input type="number" id="total-weight" placeholder="e.g., 1000">
+    
+    <label for="used-weight">Used Filament Weight (g):</label>
+    <input type="number" id="used-weight" placeholder="e.g., 250">
+    
+    <button onclick="calculateCost()">Calculate Cost</button>
+    
+    <div id="result"></div>
+    
+    <h2>Common Filament Suppliers:</h2>
+    <ul>
+        <li><a href="https://www.amazon.com/s?k=3d+printer+filament" target="_blank">Amazon</a></li>
+        <li><a href="https://www.matterhackers.com/store/c/3d-printer-filament" target="_blank">MatterHackers</a></li>
+        <li><a href="https://www.prusa3d.com/category/filaments/" target="_blank">Prusa</a></li>
+        <li><a href="https://www.polymaker.com/product-category/filaments/" target="_blank">Polymaker</a></li>
+        <li><a href="https://overture3d.com/collections/all" target="_blank">Overture</a></li>
+    </ul>
+    
+    <script src="script.js"></script>
+</body>
+</html>
