@@ -1,3 +1,4 @@
+// Calculate filament cost function
 function calculateCost() {
     const totalCost = parseFloat(document.getElementById("total-cost").value);
     const totalWeight = parseFloat(document.getElementById("total-weight").value);
@@ -13,54 +14,46 @@ function calculateCost() {
 
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `
-        <p>Cost per gram: $${costPerGram.toFixed(
+        <p>Cost per gram: $${costPerGram.toFixed(4)}</p>
+        <p>Cost of used filament: $${usedCost.toFixed(4)}</p>
+    `;
+}
 
-Yes, there are several other free options for hosting simple websites:  
+// Chatbot UI and functionality
+const chatbotCircle = document.getElementById("chatbot-circle");
+const chatbotBox = document.getElementById("chatbot-box");
+const closeButton = document.getElementById("close-chatbot");
 
-### 1. **GitHub Pages**  
-- **Pros**: Free, reliable, supports custom domains, and is great for static sites (HTML, CSS, JS).  
-- **Cons**: No backend support (only frontend code).  
-- **How to Use**:  
-  - Create a GitHub repository named `your-username.github.io`.  
-  - Upload your website files (`index.html`, `style.css`, `script.js`).  
-  - Go to the repository settings and enable GitHub Pages.  
-  - Your site will be live at `https://your-username.github.io`.  
+chatbotCircle.addEventListener("click", () => {
+    chatbotBox.classList.toggle("open");  // Toggle the visibility of the chatbot
+});
 
----
+// Close the chatbot box when the close button is clicked
+closeButton.addEventListener("click", () => {
+    chatbotBox.classList.remove("open");
+});
 
-### 2. **Netlify**  
-- **Pros**: Free custom domains, continuous deployment from GitHub, and supports static sites.  
-- **Cons**: More advanced features require a learning curve.  
-- **How to Use**:  
-  - Sign up at [Netlify](https://www.netlify.com).  
-  - Connect your GitHub repository, and it automatically deploys your site.  
-  - You can also drag-and-drop your project folder directly to deploy.  
+// Chatbot interaction (simplified for example)
+function sendMessageToChatbot(message) {
+    // This would typically send the message to your chatbot API, for now, we simulate it
+    const chatbotContent = document.getElementById("chatbot-content");
+    const userMessage = document.createElement("div");
+    userMessage.textContent = "User: " + message;
+    chatbotContent.appendChild(userMessage);
 
----
+    const botMessage = document.createElement("div");
+    botMessage.textContent = "Bot: " + "You asked: " + message;  // Here you can replace with actual API response
+    chatbotContent.appendChild(botMessage);
 
-### 3. **Vercel**  
-- **Pros**: Free hosting with custom domains, fast deployments, and GitHub integration.  
-- **Cons**: Designed more for modern web apps (Next.js), but works fine with static sites too.  
-- **How to Use**:  
-  - Sign up at [Vercel](https://vercel.com).  
-  - Link your GitHub repository or drag-and-drop your files.  
-  - Automatic deployments on every push to the main branch.  
+    chatbotContent.scrollTop = chatbotContent.scrollHeight;  // Scroll to the bottom
+}
 
----
-
-### 4. **Neocities**  
-- **Pros**: Simple to use, ideal for static websites, and comes with built-in file editing.  
-- **Cons**: Limited customization and no backend support.  
-- **How to Use**:  
-  - Go to [Neocities](https://neocities.org).  
-  - Create an account and upload your HTML, CSS, and JS files.  
-  - Your site will be live at `https://your-username.neocities.org`.  
-
----
-
-**Recommendations:**  
-- If you’re comfortable with GitHub, use **GitHub Pages** for simplicity.  
-- If you want more control and a custom domain, **Netlify** or **Vercel** are great choices.  
-- If you just want something super simple and fast, try **Neocities**.  
-
-Let me know if you need help setting up any of these!
+// Example of how you might use it
+const chatbotInput = document.getElementById("chatbot-input");
+chatbotInput.addEventListener("keypress", function (e) {
+    if (e.key === 'Enter') {
+        const message = chatbotInput.value;
+        sendMessageToChatbot(message);
+        chatbotInput.value = '';  // Clear the input field after sending
+    }
+});
